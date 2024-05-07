@@ -10,7 +10,7 @@ const Articles = () => {
             setArticlePage(articles)
         })
     }, [])
-    console.log(articlePage)
+
     return (
     <> 
      <h2>Articles</h2>
@@ -19,12 +19,10 @@ const Articles = () => {
         <ul>
         {articlePage.map((article) => {
             return <Thumbnail key={article.article_id} prop={article}/>
-                
         })}
         </ul>
      </section>
     </>
-    
     )
 }
 

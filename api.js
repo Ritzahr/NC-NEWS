@@ -12,4 +12,11 @@ const getArticles = () => {
  })
 }
 
+export const getArticlesByID = (id) => { 
+    return ncNews.get(`/api/articles/${id}`)
+    .then((response) => {
+        return response.data
+    })
+}
+
 export default getArticles;
