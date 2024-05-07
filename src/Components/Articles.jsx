@@ -4,13 +4,16 @@ import { useEffect, useState } from "react";
 
 const Articles = () => {
     const [articlePage, setArticlePage] = useState([])
+    const [isLoading, setIsLoading] = useState(true);
+
 
     useEffect(()=>{
         getArticles().then(({articles}) => {
-            setArticlePage(articles)
+            setArticlePage(articles);
+            setIsLoading(false);
         })
     }, [])
-
+    if (isLoading) return <p><h1>Loading articles...</h1></p>
     return (
     <> 
      <h2>Articles</h2>
