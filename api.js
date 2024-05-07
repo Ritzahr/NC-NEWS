@@ -6,10 +6,16 @@ const ncNews = axios.create({
 
 const getArticles = () => {
     return ncNews.get('/api/articles')
-.then((response) => {
-    
-    return response.data
+        .then((response) => {
+         return response.data
  })
+}
+
+export const getCommentsByArticle = (id) => {
+    return ncNews.get(`/api/articles/${id}/comments`)
+    .then((response)=>{
+        return response.data
+    })
 }
 
 export const getArticlesByID = (id) => { 

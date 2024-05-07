@@ -13,7 +13,7 @@ const Articles = () => {
             setIsLoading(false);
         })
     }, [])
-    if (isLoading) return <p><h1>Loading articles...</h1></p>
+    if (isLoading) return <h1><p>Loading articles...</p></h1>
     return (
     <> 
      <h2>Articles</h2>
