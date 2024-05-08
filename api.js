@@ -25,4 +25,20 @@ export const getArticlesByID = (id) => {
     })
 }
 
+export const updateArticleVotes = (id, action) => {
+    if (action==='Dislike') {
+        return ncNews.patch(`/api/articles/${id}`, { inc_votes: -1 }).then((response) => {
+            return response.data
+        }).catch((err) => {
+            return err
+        })
+    }
+    if (action==='Like') {
+        return ncNews.patch(`/api/articles/${id}`, { inc_votes: 1 }).then((response) => {
+            return response.data
+        }).catch((err) => {
+            return err
+        })
+        }
+}
 export default getArticles;

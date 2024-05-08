@@ -68,3 +68,13 @@
   margin-left: 30px;
   margin-right: 30px;
 }
+
+#like-btn-true {
+  background-color: rgb(85, 102, 251);
+  color: aliceblue;
+}
+
+#dislike-btn-true {
+  background-color: rgb(224, 98, 84);
+  color: aliceblue;
+}
