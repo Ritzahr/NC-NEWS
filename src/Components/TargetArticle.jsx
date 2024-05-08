@@ -1,19 +1,37 @@
-import { getArticlesByID } from "../../api";
+import { getArticlesByID, getCommentsByArticle } from "../../api";
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
+import CommentCard from './CommentCard'
 
 
 const TargetArticle = () => {
     const [targetArticle, setTargetArticle] = useState([]);
+    const [comments, setComments] = useState([]);
+    const [showComments, setShowComments] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+
     const { article_id } = useParams();
+
+    const commentClick = () => {
+        setShowComments((currentState)=>{
+           return !currentState
+        })
+    }
     
     useEffect(()=>{
         getArticlesByID(article_id)
         .then(({ article }) => {
             setTargetArticle(article)
+            setIsLoading(false)
+        })
+        getCommentsByArticle(article_id)
+        .then(({comments}) => {
+            setComments(comments)
         })
     }, [])  
 
+    if(isLoading) return <h1>Loading article....</h1>
+    
     return (
     <>
     <section id="meta-info"> 
@@ -27,8 +45,13 @@ const TargetArticle = () => {
         <p>{targetArticle.body}</p>
     </section>
     <section id="action"> 
-        <button>Comments: 0</button>
-        <button>Likes: 0</button>
+        <button onClick={()=> {commentClick()}}>Comments: {targetArticle.comment_count}</button>
+        <button>Likes: {targetArticle.votes}</button>
+        <ul>
+            {showComments ? comments.map((comment)=>{
+            return <li key={comment.comment_id}><CommentCard prop={comment}/></li> 
+        }): null}
+        </ul>
     </section>
     </> 
 )
