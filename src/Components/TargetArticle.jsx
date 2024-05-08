@@ -8,6 +8,7 @@ const TargetArticle = () => {
     const [targetArticle, setTargetArticle] = useState([]);
     const [comments, setComments] = useState([]);
     const [showComments, setShowComments] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const { article_id } = useParams();
 
@@ -21,12 +22,15 @@ const TargetArticle = () => {
         getArticlesByID(article_id)
         .then(({ article }) => {
             setTargetArticle(article)
+            setIsLoading(false)
         })
         getCommentsByArticle(article_id)
         .then(({comments}) => {
             setComments(comments)
         })
     }, [])  
+
+    if(isLoading) return <h1>Loading article....</h1>
     
     return (
     <>
