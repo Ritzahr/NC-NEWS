@@ -18,7 +18,7 @@ const CommentCard = ({prop}) => {
         <section id='comment-box'>
         <p className="comment-meta">{prop.created_at}</p>
         <p id="comment-text">{prop.body}</p>
-        <p className="comment-meta">Author: {prop.author}</p>
+        <h5 className="comment-meta">Author: {prop.author}</h5>
         <p className="comment-meta">Likes: {votes}
         <button onClick={incrementVote} disabled={isDisabled} className="comment-meta">Like comment</button>
         <button onClick={decrementVote} disabled={isDisabled}className="comment-meta">Dislike comment</button>

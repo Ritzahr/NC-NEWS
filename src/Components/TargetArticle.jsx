@@ -5,7 +5,9 @@ import {
 } from "../../api";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import CommentCard from "./CommentCard";
+import Comments from "./Comments";
+import ErrorPage from "./ErrorPage";
+import { UserNameContext } from "../Contexts/Users";
 
 const TargetArticle = () => {
   const [targetArticle, setTargetArticle] = useState([]);
@@ -14,25 +16,26 @@ const TargetArticle = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [likeIsDisabled, setLikeDisable] = useState(false);
   const [dislikeIsDisabled, setDislikeDisable] = useState(false);
+  const [error, setError] = useState(null);
+ 
 
   const { article_id } = useParams();
 
   useEffect(() => {
     getArticlesByID(article_id).then(({ article }) => {
-      setTargetArticle(article)
+     article===undefined? Promise.reject({ status: 400, msg: "Invalid input type" }): setTargetArticle(article)
       setIsLoading(false);
-    });
+    }).catch((err) => {
+        console.log(err)
+        if (err) {
+            setError(true)
+        }
+    }
+    );
     getCommentsByArticle(article_id).then(({ comments }) => {
       setComments(comments);
     });
   }, []);
-
-
-  const commentClick = () => {
-    setShowComments((currentState) => {
-      return !currentState;
-    });
-  };
 
   const clickHandle = ({target}) => {
     if (target.innerText==="Like") {
@@ -49,10 +52,13 @@ const TargetArticle = () => {
         setDislikeDisable(true)
     }
   };
-
+  
   if (isLoading) return <h1>Loading article....</h1>;
-
-  return (
+  if (error) { 
+    {console.log("hit")}
+    return <ErrorPage/>
+    } else {
+    return (
     <>
       <section id="meta-info">
         <title>{targetArticle.title}</title>
@@ -78,23 +84,11 @@ const TargetArticle = () => {
           onClick={(event) => {clickHandle(event)}}
         >Dislike
         </button>
-        <button
-          onClick={() => {commentClick()}}
-        >Comments: {targetArticle.comment_count}
-        </button>
-        <ul>
-          {showComments
-            ? comments.map((comment) => {
-                return (
-                  <li key={comment.comment_id}>
-                    <CommentCard prop={comment} />
-                  </li> 
-                  ); 
-                }) : null}
-        </ul>
+       <Comments states={[article_id, comments, setComments, showComments, setShowComments]}/>
       </section>
     </>
   );
+ }
 };
 
 export default TargetArticle;
