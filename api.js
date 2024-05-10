@@ -60,4 +60,11 @@ export const postComment = (id, user, text) => {
         return err
     })
 }
+
+export const deleteComment = (comment_id) => {
+
+    return ncNews.delete(`/api/comments/${comment_id}`).then((response) => {
+        return response
+    })
+}
 export default getArticles;
