@@ -15,21 +15,17 @@ const getArticles = () => {
 }
 
 export const getCommentsByArticle = (id) => {
-    console.log(id)
-    if (typeof id!== 'number') { 
-        console.log("rejected")
-        return Promise.reject({status: 400, msg: "Invalid input type"})
-    }
+   
     return ncNews.get(`/api/articles/${id}/comments`)
     .then((response)=>{
         return response.data
     }).catch((err)=>{
-        console.log(err.message)
         return err.message
     })
 }
 
 export const getArticlesByID = (id) => { 
+   
     return ncNews.get(`/api/articles/${id}`)
     .then((response) => {
         return response.data

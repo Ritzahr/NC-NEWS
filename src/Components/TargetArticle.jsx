@@ -22,16 +22,15 @@ const TargetArticle = () => {
   const { article_id } = useParams();
 
   useEffect(() => {
-    getArticlesByID(article_id).then(({ article }) => {
-     article===undefined? Promise.reject({ status: 400, msg: "Invalid input type" }): setTargetArticle(article)
-      setIsLoading(false);
-    }).catch((err) => {
-        console.log(err)
-        if (err) {
-            setError(true)
-        }
-    }
-    );
+    getArticlesByID(article_id).then((response) => {
+     if (response.message) {
+        setError(response)
+     } else {
+        const { article } = response;
+        setTargetArticle(article)
+        setIsLoading(false);
+     }
+    })
     getCommentsByArticle(article_id).then(({ comments }) => {
       setComments(comments);
     });
@@ -55,8 +54,7 @@ const TargetArticle = () => {
   
   if (isLoading) return <h1>Loading article....</h1>;
   if (error) { 
-    {console.log("hit")}
-    return <ErrorPage/>
+    return <ErrorPage status={error.message} code={error.code}/>
     } else {
     return (
     <>
