@@ -5,6 +5,14 @@
   text-align: center;
 }
 
+.header {
+  width: 100%;
+  border-style: solid;
+  border-radius: 50px;
+  background-color: rgb(253, 141, 85);
+  color: aliceblue;
+}
+
 #home-img {
   margin: 40px;
   width: 500px;
@@ -15,11 +23,13 @@
   border-style: solid; 
   border-width: 10px;
   border-radius: 10%;
+  border-color: rgb(253, 141, 85);
 }
 
-#Home {
+.Header-btn{
+  background-color: rgb(253, 141, 85);
   display: inline-block;
-  color: green;
+  color: aliceblue;
 }
 
 #article-thumbnail {
@@ -29,6 +39,7 @@
   border-style: solid;
   width: 300px;
   height: 300px;
+  border-color: rgb(253, 141, 85);
 }
 #thumbnail-img {
   border-top-right-radius: 10%;
@@ -55,13 +66,15 @@
 #comment-text{
   padding:70px;
   display: block;
-  border-radius: 18%;
+  border-radius: 40px;
   border: 2px;
   border-style: solid;
-  background-color: rgba(98, 237, 121, 0.233);
-  font-style: normal;
+  background-color: rgb(253, 141, 85);
   width: 400px;
   height:fit-content;
+  color: aliceblue;
+  border-color: black;
+  font-family: fantasy;
 }
 .comment-meta {
   display:inline-block;
@@ -77,4 +90,20 @@
 #dislike-btn-true {
   background-color: rgb(224, 98, 84);
   color: aliceblue;
+}
+
+.comment-section {
+  list-style-type: none;
+  border-radius: 50px;
+  border-style: solid;
+  border: 20px;
+  border-color: rgb(253, 141, 85);
+  background-color: rgb(255, 255, 255);
+}
+
+#comment-input {
+  display: block;
+  border-radius: 10px;
+  height: 200px; 
+  width: 500px;
 }
