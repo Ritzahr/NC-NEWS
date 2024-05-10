@@ -3,6 +3,7 @@ import getArticles, { getArticleByTopic } from "../../api";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import FilterBtn from "./Filter";
+import SortByBTN from "./SortBy";
 
 const Articles = () => {
     const [articlePage, setArticlePage] = useState([])
@@ -29,8 +30,11 @@ const Articles = () => {
     if (isLoading) return <h1><p>Loading articles...</p></h1>
     return (
     <> 
-     <h2>Articles</h2>
-    <FilterBtn queryString={queryString} setArticlePage={setArticlePage}/>
+     <h1>Articles</h1>
+     <section className="options">
+     <FilterBtn queryString={queryString} setArticlePage={setArticlePage}/>
+     <SortByBTN setArticlePage={setArticlePage}/>
+     </section>
      <section>
         <ul>
         {articlePage.map((article) => {
