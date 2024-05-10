@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Comments from "./Comments";
 import ErrorPage from "./ErrorPage";
-import { UserNameContext } from "../Contexts/Users";
+
 
 const TargetArticle = () => {
   const [targetArticle, setTargetArticle] = useState([]);
